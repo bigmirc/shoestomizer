@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- linking login style sheet -->
+    <link rel='stylesheet' href='/styles/indexStyle.css' />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    <title>Index</title>
+
+</head>
+
+<body onload="bringSneakers()">
+    <div class="navbar">
+        <div class="menu">
+            <button  class="hamburger" onclick="showSidebar()">☰</button>
+        </div>
+        <div class="title">shoestomizer.</div>
+        <div class="welcoming">Welcome, <%= name    %>!</div>
+    </div>
+
+
+    <div class="sidebar" id="sidebar">
+
+        <a href="#About"></i> About</a>
+
+        <a href="#contact">Contact</a>
+
+        <form action="/logout?_method=DELETE" method="POST">
+            <button class="aButton" type="submit"> Logout
+            </button>
+        </form>
+
+        <button  class="aButton" onclick="hideSidebar()"> Close
+            
+        </button>
+
+    </div> 
+    
+    <div class="sidebarImages" id="sidebarImages">
+
+        <i class="fa fa-fw fa-home"></i>
+
+        <i class="fa fa-fw fa-envelope"></i>
+
+        <i class="fa fa-fw fa-user"></i> 
+
+        <i class="fa fa-fw fa-times" onclick="hideSidebar()" style="cursor:pointer"></i> 
+
+
+    </div>
+    
+
+    <h1 style="color: rgb(176, 206, 255);">PICK</h1>
+    <h1 style="color: rgb(255, 170, 0);">YOUR</h1>
+    <h1 style="color: rgb(125, 219, 145);">PAIR!</h1>
+
+
+    <br><br><br><br><br>
+    <h2>...and start customising now</h2>
+
+
+    <div class="shoeContainer" id="shoeContainer">
+
+        <div id="snkrimg">
+            <img id="AF1"  src="/images/af1500.png" onclick="afiseazaNume()"  alt="Air Force 1s">
+            <img id="AJ1"  src="/images/aj1500.png" onclick="afiseazaNume()"  alt="Air Jordan 1s" style="margin-left:440px">      
+            <img id="SUP"  src="/images/superstar500.png" onclick="afiseazaNume()"  alt="Superstars" style="margin-top: 320px;">
+            <img id="AM1"  src="/images/am1500.png" onclick="afiseazaNume()"  alt="Air Max 1s" style="margin-left: 440px; margin-top: 320px;">
+        </div>
+
+        <div id="sneakerName"> </div>
+
+
+    </div>
+
+    <a href="/customize"> meri la custom</a>
+
+
+
+    <script src="/js_functional/index.js"></script>
+</body>
+

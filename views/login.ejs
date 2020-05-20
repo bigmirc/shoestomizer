@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- linking login style sheet -->
+    <link rel='stylesheet' href='/styles/loginRegisterStyle.css' />
+    
+
+    <title>Shoestomizer Login</title>
+
+    
+</head>
+<body>
+
+
+
+    <div class="loginwrapper">    
+
+            <div class="title">shoestomizer.</div>
+            <br>
+            <div class="subtitle">Log into your account!</div>
+            <br>
+
+            <form action="/login" method="POST">
+                <div class="userpwdwrapper">
+                    <div class="iconcontainer">
+                        <img src="images/email.png" alt="user icon">
+                    </div>
+                    <input  type="email" id="inputdata" name="email" autocomplete ="off" placeholder="E-mail" required>
+                </div>
+
+                <div class="userpwdwrapper">
+                    <div class="iconcontainer">
+                        <img src="images/pwd.png" alt="user icon">
+                    </div>
+                    <input  type="password" id="inputdata" name="password" autocomplete ="off" placeholder="Password" required>
+                </div>
+                <div class="errmsg">
+                    <% if (messages.error) { %>
+                        <%= messages.error  %>
+                    <% } %>
+                    </div>
+                
+                
+
+                <button class="loginButton" type="submit">Login</button>
+
+            </form>
+
+            <br>
+            <br>
+
+            <a  class="back" href="/register">New account</a>
+
+
+
+    </div>
+
+    
+</body>
+</html>

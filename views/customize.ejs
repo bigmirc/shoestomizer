@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- linking login style sheet -->
+    <link rel='stylesheet' href='/styles/customizeStyle.css' />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    <title>Index</title>
+
+</head>
+
+<body>
+    <div class="navbar">
+        <div class="menu">
+            <button  class="hamburger" onclick="showSidebar()">☰</button>
+        </div>
+        <div class="title">shoestomizer.</div>
+        <div class="welcoming">Welcome, <%= name    %>!</div>
+    </div>
+
+
+    <div class="sidebar" id="sidebar">
+
+        <a href="#About"></i> About</a>
+
+        <a href="#contact">Contact</a>
+
+        <form action="/logout?_method=DELETE" method="POST">
+            <button class="aButton" type="submit"> Logout
+            </button>
+        </form>
+
+        <button  class="aButton" onclick="hideSidebar()"> Close
+            
+        </button>
+
+    </div> 
+    
+    <div class="sidebarImages" id="sidebarImages">
+
+        <i class="fa fa-fw fa-home"></i>
+
+        <i class="fa fa-fw fa-envelope"></i>
+
+        <i class="fa fa-fw fa-user"></i> 
+
+        <i class="fa fa-fw fa-times" onclick="hideSidebar()" style="cursor:pointer"></i> 
+
+
+    </div>
+    
+
+    <canvas id="canvas">
+
+    </canvas>
+
+
+
+    <script src="/js_functional/canvas.js"></script>
+</body>
+
