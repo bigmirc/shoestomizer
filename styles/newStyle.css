@@ -8,7 +8,7 @@ html,body{
 }
 
 body {
-    background-image: url("/images/galbin.jpeg");
+    background-color: rgb(253, 242, 0);
     background-repeat:no-repeat ;
     background-size:cover;
     font-family: Work Sans;
@@ -151,64 +151,14 @@ body {
 }
 
 
+.error{
 
-
-h1 {
-    font-weight: bolder;
-    font-style: italic;
-    margin-bottom: -5vw;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin-left: 17vw;
-    font-size: 9vw;
-    text-shadow: 5px 0px 0px pink;
-
-}
-h2{
-    font-size: 1.8vw;
-    color: rgb(114, 166, 24);
-    margin-left: 18vw;
-}
-
-
-.shoeContainer{
-
-    padding-top: 8vw;
-    z-index: 1;
-
-    position: fixed;
-    right: 0;
-    top: 0;
-    margin-left:54% ;
-    background-color: rgba(0, 0, 0, 0);
-    height: 100%;
-    width: 55.5%;
-    transition: 2s;
-}
-
-.shoeContainer img{
-    position: fixed;
-    width: 380px;
-    height: 380px;
-}
-
-#snkrimg{
-
-    margin-top: 35px;
-    margin-left:1000px;
-    transition: 1.8s;
-}
-
-
-#sneakerName{
-    font-weight: 900;
-    color: black;
-    margin-top:75%;
-    font-size: 2vw;
-    margin-left: 40%;
-    margin-right:30%;
-
-}
-
-.tempo{
     color: black;
 }
+
+
+
+
+
+
+

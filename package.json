@@ -6,13 +6,14 @@
   "scripts": {
     "start": "node server.js",
     "devStart": "nodemon server.js",
-    "startDB":"brew services start mongodb-community@4.2",
-    "stopDB":"stop mongodb-community@4.2"
+    "startDB": "brew services start mongodb-community@4.2",
+    "stopDB": "brew services stop mongodb-community@4.2"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^4.0.1",
+    "body-parser": "^1.19.0",
     "ejs": "^3.0.2",
     "express": "^4.17.1",
     "express-flash": "0.0.2",

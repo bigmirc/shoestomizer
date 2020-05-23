@@ -12,6 +12,7 @@ const flash = require('express-flash');
 const session = require('express-session');
 const methodOverride = require('method-override');
 const initializePassport = require('./passport-config');
+const bodyParser = require ('body-parser')
 
 initializePassport(
     passport,
@@ -47,6 +48,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(methodOverride("_method"))
+app.use(bodyParser.urlencoded({limit:'10mb', extended: false}))
 
 // app.get('/', checkAuthenticated, (req,res) =>{
 //     res.render('index.ejs', {name: req.user.name});
