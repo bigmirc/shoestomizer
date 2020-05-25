@@ -9,7 +9,7 @@ const sneakerSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    imageURL: {
+    imageName: {
         type: String,
         required: true
     }

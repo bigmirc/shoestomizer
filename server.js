@@ -32,8 +32,9 @@ db.once('open', () => console.log('connected to Mongoose'))
 
 
 
-const users=[]; //variabila locala pt useri - fa un db in schimb
+const users=[]; //variabila locala pt useri 
 
+app.use("/public",express.static(__dirname + "/public")); //
 app.use("/styles",express.static(__dirname + "/styles")); //
 app.use("/images",express.static(__dirname + "/images"));
 app.use("/js_functional",express.static(__dirname + "/js_functional"));

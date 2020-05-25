@@ -50,7 +50,7 @@
     </div>
 
 
-    <form action="/" method="POST">
+    <form action="/" method="POST" enctype="multipart/form-data">
         <label style="color:black">name</label>
         <br>
         <input autocomplete="off" type="text" name="name" value="<%= sneaker.name %>"> 
@@ -59,11 +59,12 @@
         <br>
         <input autocomplete="off" type="number" name="price" value="<%= sneaker.price %>">    
         <br>
-        <label style="color:black">imageURL</label>
+        <label style="color:black">image Name</label>
         <br>
-        <input autocomplete="off" type="text" name="imageURL" value="<%= sneaker.imageURL %>"> 
+
         <br>
-        <br>
+        <input name="myImage" type="file">
+<br><br><br>
 
         <a href="/"> cancel</a>
 
