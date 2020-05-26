@@ -57,6 +57,9 @@ app.use(bodyParser.urlencoded({limit:'10mb', extended: false}))
 const indexRouter = require('./routes/index')
 app.use('/', indexRouter)
 
+const sneakersRouter = require('./routes/sneakers')
+app.use('/', sneakersRouter)
+
 
 // app.get('/customize', checkAuthenticated, (req,res) =>{
 //     res.render('customize.ejs', {name: req.user.name});
