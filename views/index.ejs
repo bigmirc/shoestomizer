@@ -77,7 +77,8 @@
     </div>
 
     <% sneakers.forEach(sneaker =>{  %> 
-        <div class="tempo"><%= sneaker.name %> </div>
+        <div style="color: black;"><%= sneaker.name %></div>
+        <img style="display:list-item;" height="100px" width="100px" src="<%=sneaker.imagePath%>"> </img>
     <% }) %> 
 
     <a href="/customize"> meri la custom</a>

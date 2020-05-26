@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const path = require('path')
 
 const sneakerSchema = new mongoose.Schema({
     name: {
@@ -15,5 +16,12 @@ const sneakerSchema = new mongoose.Schema({
     }
 
 }) 
+
+sneakerSchema.virtual('imagePath').get( function(){
+    if (this.imageName != null){
+        return path.join('/public/uploads',this.imageName)
+
+    }
+})
 
 module.exports = new mongoose.model('Sneaker', sneakerSchema)

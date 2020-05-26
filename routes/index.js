@@ -4,6 +4,7 @@ const router = express.Router()
 const Sneaker = require('../models/sneaker')
 const multer = require('multer');
 const path = require('path');
+const fs = require('fs')
 
 // Set The Storage Engine
 const storage = multer.diskStorage({
@@ -66,6 +67,15 @@ router.get('/new', checkAuthenticated, (req,res) => {
     res.render('new.ejs', {name:req.user.name, sneaker: new Sneaker()})
 })
 
+
+
+
+function removeSneakerImage(fileName){
+  fs.unlink(path.join('./public/uploads/',fileName), err =>{
+    if (err) console.log(err)
+  })
+
+}
 //create sneaker route
 router.post('/', upload.single("myImage"), async (req,res) => {
 
@@ -85,15 +95,10 @@ router.post('/', upload.single("myImage"), async (req,res) => {
 
     } catch {
 
-        res.render('new.ejs', {name:req.user.name, sneaker: sneaker, errorMessage: 'Error creating sneaker'})
+      if (sneaker.imageName != null){removeSneakerImage(sneaker.imageName)}
+      res.render('new.ejs', {name:req.user.name, sneaker: sneaker, errorMessage: 'Error creating sneaker'})
 
     }
 })
 
 module.exports = router
-
-
-
-
-
-
