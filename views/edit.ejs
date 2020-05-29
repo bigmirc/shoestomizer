@@ -5,15 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- linking login style sheet -->
-    <link rel='stylesheet' href='/styles/sneakersStyle.css' />
+    <link rel='stylesheet' href='/styles/editStyle.css' />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     
-    <title>Index</title>
+    <title>Edit Sneaker</title>
 
 </head>
 
 <body>
-
     <div class="navbar">
         <div class="menu">
             <button  class="hamburger" onclick="showSidebar()">☰</button>
@@ -21,8 +20,6 @@
         <div class="title">shoestomizer.</div>
         <div class="welcoming">Welcome, <%= name    %>!</div>
     </div>
-
-
     <div class="sidebar" id="sidebar">
 
         <a href="#About"></i> About</a>
@@ -39,7 +36,6 @@
         </button>
 
     </div> 
-    
     <div class="sidebarImages" id="sidebarImages">
 
         <i class="fa fa-fw fa-home"></i>
@@ -52,42 +48,52 @@
 
 
     </div>
+
+
+    <form class="editForm" action="/sneakers/<%= sneaker.id %>?_method=PUT" method="POST" enctype="multipart/form-data">
+        <br>
+        <br>
+        <h1>edit sneaker</h1>
+
+        <br>
+        <br>
+        
+        <label>name:</label>
+        <br>
+        <input class="keyboardInput" autocomplete="off" type="text" name="name" value="<%= sneaker.name %>"> 
+        <br>
+        <br>
+        <br>
+        <label>price:</label>
+        <br>
+        <input class="keyboardInput" autocomplete="off" type="number" name="price" value="<%= sneaker.price %>">    
+        <br>
+        <br>
+        <label>image:</label>
+        <br>
+        <br>
+        <label for="file-upload" class="inputfile">
+            <i class="fa fa-cloud-upload"></i> upload file
+        </label>
+        <input id="file-upload" class="inputfile" name="myImage" type="file">
+<br><br><br>
+
+        <a class="cancel" href="/sneakers"> cancel</a>
+
+        <button class="update" type="submit"> update sneaker</button>
+
+        <br><br><br>
+
+
+        <% if (locals.errorMessage != null) { %> 
+        <div class="error"><%= errorMessage %> </div>
+        <% } %> 
+    
+    
+    </form> 
     
 
-    <h1>ALL SNEAKERS</h1>
-
-    <div class="container">
-        <% sneakers.forEach(sneaker =>{  %> 
-            <div class="snkrname"><%= sneaker.name %></div>
-
-            <br>
-
-            <img height="200px" width="200px" src="<%=sneaker.imagePath%>"> </img>
-
-            <div class="vedit" style="background-color: rgb(109, 189, 109);">
-                <a href="/sneakers/<%= sneaker.id %>" > view</a>
-            </div>
-            
-            <div class="vedit" style="background-color: rgb(146, 146, 201);">        
-                <a href="/sneakers/<%= sneaker.id %>/edit" > edit</a>
-            </div>
-
-            <div class="delContainer">
-                <form method="POST" action="/sneakers/<%= sneaker.id %>?_method=DELETE">
-                        <button class="delButton" type="submit"> delete </button>
-                </form>
-            </div>
-
-        <% }) %> 
-    </div>
-
-    <a class="newSneakerButton" href="/new">ADD A NEW SNEAKER</a>
-
-    <a class="back" href="/">inapoi</a>
-
-
-
-
     <script src="/js_functional/index.js"></script>
+
 </body>
 

@@ -158,7 +158,84 @@ body {
 
 
 
+.newForm{
+    color: black;
+    margin-left: 18%;
+}
+
+label{
+    font-size:2vw;
+}
+
+
+.keyboardInput{
+    height: 42px;
+    outline: none;
+    border-radius: 50px;
+    font-size: 1.5vw;
+    border:2px solid rgb(207, 248, 126);
+    color:black;
+    text-indent: 1vw;
+    background-color: rgb(255, 255, 255,0.9);
+}
+
+
+input[type="file"] {
+    display: none;
+}
+.inputfile {
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+    border:2px solid rgb(207, 248, 126);
+    border-radius: 50px;
+    background-color: rgb(255, 255, 255,0.8);
+}
 
 
 
+.createButton {
+    cursor: pointer;
+    width: 260px;
+    font-size: 1vw;
+    color: white;
+    font-weight: bolder;
+    border: 2px solid black;
+    padding: 17px;
+    border-radius: 50px;
+    text-decoration: none;
+    background-color: rgb(231, 84, 84);
+    display: inline-block;
+    
+    -webkit-transform: perspective(1px) translateZ(0);
+    transform: perspective(1px) translateZ(0);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-property: transform;
+    transition-property: transform;
+}
 
+.createButton:hover, .createButton:focus, .createButton:active {
+    -webkit-transform: scale(1.15);
+    transform: scale(1.15);
+}
+
+.cancel{
+    border: 2px solid black;
+
+    cursor: pointer;
+    width: 100px;
+    text-align: center;
+    color: white;
+    text-decoration: none;
+
+    display: inline-block;
+
+    font-size: 1vw;
+    padding: 17px;
+    border-radius: 50px;
+    background-color: rgb(148, 228, 217);
+
+
+}

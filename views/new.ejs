@@ -7,8 +7,9 @@
     <!-- linking login style sheet -->
     <link rel='stylesheet' href='/styles/newStyle.css' />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
     
-    <title>Index</title>
+    <title>New Sneaker</title>
 
 </head>
 
@@ -50,25 +51,38 @@
     </div>
 
 
-    <form action="/sneakers" method="POST" enctype="multipart/form-data">
-        <label style="color:black">name</label>
+
+    <form class="newForm" action="/sneakers" method="POST" enctype="multipart/form-data">
         <br>
-        <input autocomplete="off" type="text" name="name" value="<%= sneaker.name %>"> 
         <br>
-        <label style="color:black">price</label>
+        <h1>+ new sneaker</h1>
         <br>
-        <input autocomplete="off" type="number" name="price" value="<%= sneaker.price %>">    
-        <br>
-        <label style="color:black">image Name</label>
         <br>
 
+        <label>name:</label>
         <br>
-        <input name="myImage" type="file">
-<br><br><br>
+        <input class="keyboardInput" autocomplete="off" type="text" name="name" value="<%= sneaker.name %>"> 
+        <br>
+        <br>
+        <br>
+        <label>price:</label>
+        <br>
+        <input class="keyboardInput" autocomplete="off" type="number" name="price" value="<%= sneaker.price %>">    
+        <br>
+        <br>
+        <label>image:</label>
+        <br>
+        <br>
 
-        <a href="/"> cancel</a>
+        <label for="file-upload" class="inputfile">
+            <i class="fa fa-cloud-upload"></i> upload file
+        </label>
+        <input id="file-upload" name="myImage" type="file" class="inputfile">
+        <br><br><br>
 
-        <button type="submit"> creaza papuk nou</button>
+        <a class="cancel" href="/sneakers"> cancel</a>
+
+        <button class="createButton" type="submit"> create new sneaker</button>
 
         <br><br><br>
 
@@ -79,9 +93,12 @@
     
     
     </form> 
-    
 
+
+    <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
+    <script src="https://unpkg.com/filepond/dist/filepond.js"></script>
     <script src="/js_functional/index.js"></script>
+    
 
 </body>
 
