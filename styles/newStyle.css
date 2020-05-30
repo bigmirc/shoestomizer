@@ -195,6 +195,7 @@ input[type="file"] {
 
 
 .createButton {
+    outline: none;
     cursor: pointer;
     width: 260px;
     font-size: 1vw;

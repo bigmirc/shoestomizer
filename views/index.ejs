@@ -65,10 +65,14 @@
     <div class="shoeContainer" id="shoeContainer">
 
         <div id="snkrimg">
-            <img id="AF1"  src="/images/af1500.png" onclick="afiseazaNume()"  alt="Air Force 1s">
-            <img id="AJ1"  src="/images/aj1500.png" onclick="afiseazaNume()"  alt="Air Jordan 1s" style="margin-left:440px">      
-            <img id="SUP"  src="/images/superstar500.png" onclick="afiseazaNume()"  alt="Superstars" style="margin-top: 320px;">
-            <img id="AM1"  src="/images/am1500.png" onclick="afiseazaNume()"  alt="Air Max 1s" style="margin-left: 440px; margin-top: 320px;">
+            <% sneakers.forEach(sneaker =>{  %> 
+
+                <img  src="<%=sneaker.imagePath%>"> </img>
+                <a class="customButton" href="/customize/<%= sneaker.id %>">customize</a>
+
+                <br><br><br><br>
+            <% }) %> 
+
         </div>
 
         <div id="sneakerName"> </div>
@@ -78,7 +82,6 @@
 
 
 
-    <a  style="margin-left: 19vw;" class="buton" href="/customize">customize</a>
     <a class="buton" href="/sneakers">all sneakers</a>
 
 

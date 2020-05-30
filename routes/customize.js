@@ -1,6 +1,8 @@
 
 const express = require("express")
 const router = express.Router()
+const Sneaker = require('../models/sneaker')
+
 
 
 
@@ -14,9 +16,20 @@ function checkAuthenticated(req, res, next){
 
 }
 
-router.get('/customize', checkAuthenticated, (req,res) => {
-    res.render('customize.ejs', {name:req.user.name})
+//route for showing one sneaker by id
+router.get('/customize/:id', checkAuthenticated, async (req,res) =>{
+
+    try {
+        const sneaker = await Sneaker.findById(req.params.id)
+        res.render('customize.ejs', {name:req.user.name, sneaker: sneaker})
+
+      } catch (error) {
+        console.log(error)
+        res.redirect('/index')
+        
+    }
 })
+
 
 module.exports = router
 

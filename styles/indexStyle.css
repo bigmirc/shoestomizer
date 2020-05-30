@@ -172,7 +172,7 @@ h2{
 
 .shoeContainer{
 
-    padding-top: 8vw;
+    padding-top: 2vw;
     z-index: 1;
 
     position: fixed;
@@ -187,27 +187,19 @@ h2{
 
 .shoeContainer img{
     position: fixed;
-    width: 380px;
-    height: 380px;
+    width: 260px;
+    height: 260px;
 }
 
 #snkrimg{
 
-    margin-top: 35px;
+    margin-top: 50px;
     margin-left:1000px;
     transition: 1.8s;
 }
 
 
-#sneakerName{
-    font-weight: 900;
-    color: black;
-    margin-top:75%;
-    font-size: 2vw;
-    margin-left: 40%;
-    margin-right:30%;
 
-}
 
 .buton{
     margin-left: 100px;
@@ -219,4 +211,26 @@ h2{
     text-decoration: none;
     
 }
+
+.snkrname{
+    display: inline-table;
+    color: black;
+    position: static;
+}
+
+
+.customButton{
+
+    margin-top: 110px;
+    margin-left: 300px;
+    display: inline-block;
+    background-color: rgb(24, 12, 37);
+    color: white;
+    font-weight: bolder;
+    padding: 17px;
+    border-radius: 50px;
+    text-decoration: none;
+    
+}
+
 
