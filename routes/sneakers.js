@@ -104,7 +104,7 @@ router.post('/sneakers', upload.single("myImage"), async (req,res) => {
 
 //route for showing one sneaker by id
 router.get('/sneakers/:id',  (req,res) =>{
-  res.send('show sneaker' + req.params.id)
+  res.render('view.ejs', {name:req.user.name, sneaker: sneaker})
 })
 
 //route for edit one sneaker by id

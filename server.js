@@ -37,6 +37,7 @@ const users=[]; //variabila locala pt useri
 app.use("/public",express.static(__dirname + "/public")); //
 app.use("/styles",express.static(__dirname + "/styles")); //
 app.use("/images",express.static(__dirname + "/images"));
+app.use("/customizer",express.static(__dirname + "/customizer"));
 app.use("/js_functional",express.static(__dirname + "/js_functional"));
 app.set('view-engine','ejs')
 app.use(express.urlencoded({extended:false})); //to use the forms

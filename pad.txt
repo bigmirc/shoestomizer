@@ -1,3 +1,0 @@
-        <% sneakers.forEach(sneaker =>{  %> 
-            <img id="snkrimg" height="200px" width="200px" src="<%=sneaker.imagePath%>"> </img>
-        <% }) %> 
