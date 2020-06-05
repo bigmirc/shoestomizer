@@ -6,11 +6,12 @@ const User = require('./models/user')
 
 function initialize(passport, getUserByEmail, getUserById) {
     const authenticateUser = async (email, password, done) => {
-        const user = getUserByEmail(email)
-        const user2 = (await User.findOne({email:email})).toJSON()
+        const user2 = getUserByEmail(email)
+        var user = (await User.findOne({email:email}))
         if (user == null) {
             return done(null, false, { message: 'There is no user with that password. Please try again'})
         };
+        user = user.toJSON()
 
         try {
             if ( await bcrypt.compare(password,user.password)) {
@@ -25,10 +26,14 @@ function initialize(passport, getUserByEmail, getUserById) {
     }
 
     passport.use(new LocalStrategy({usernameField: 'email'},authenticateUser))
-    passport.serializeUser((user,done) => done(null,user.id))
-    passport.deserializeUser((id,done) => {
-        return done(null,getUserById(id))
-    })
+
+    passport.serializeUser(function(user, done) {
+        done(null, user);
+      });
+      
+      passport.deserializeUser(function(user, done) {
+        done(null, user);
+      });
 
     
 

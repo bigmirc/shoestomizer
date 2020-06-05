@@ -94,12 +94,7 @@ app.post('/register',checkNotAuthenticated, async (req,res)=>{
 
 
         const hashedPassword = await bcrypt.hash(req.body.password,10); //10 - how many times do you want it hashed? 10 makes it quick and secure.
-        users.push({
-            id: Date.now().toString(),
-            name: req.body.name,
-            email: req.body.email,
-            password: hashedPassword
-        });
+
         const newUser = new User({
             name: req.body.name,
             email: req.body.email,
@@ -111,7 +106,6 @@ app.post('/register',checkNotAuthenticated, async (req,res)=>{
         console.log('errrr')
         res.redirect('/register');
     }
-    console.log(users);
 });
 
 app.delete('/logout', (req, res) => {
