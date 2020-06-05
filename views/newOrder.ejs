@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- linking login style sheet -->
+    <link rel='stylesheet' href='/styles/newOrderStyle.css' />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    
+    <title>Order</title>
+
+</head>
+
+<body>
+    <div class="navbar">
+        <div class="menu">
+            <button  class="hamburger" onclick="showSidebar()">☰</button>
+        </div>
+        <a  style="color:rgb(165, 133, 151);" href="/"><div class="title">shoestomizer.</div></a>
+        <div class="welcoming">Welcome, <%= name    %>!</div>
+    </div>
+    <div class="sidebar" id="sidebar">
+
+        <a href="#About"></i> About</a>
+
+        <a href="#contact">Contact</a>
+
+        <form action="/logout?_method=DELETE" method="POST">
+            <button class="aButton" type="submit"> Logout
+            </button>
+        </form>
+
+        <button  class="aButton" onclick="hideSidebar()"> Close
+            
+        </button>
+
+    </div> 
+    <div class="sidebarImages" id="sidebarImages">
+
+        <i class="fa fa-fw fa-home"></i>
+
+        <i class="fa fa-fw fa-envelope"></i>
+
+        <i class="fa fa-fw fa-user"></i> 
+
+        <i class="fa fa-fw fa-times" onclick="hideSidebar()" style="cursor:pointer"></i> 
+
+
+    </div>
+
+
+
+    <form class="orderForm" action="/orders" method="POST" enctype="multipart/form-data">
+        <%= sneaker %> 
+        <br>
+        <br>
+        <h1>Order details</h1>
+        <br>
+        <label>sneaker name:</label>
+        <br>
+        <input class="keyboardInputS" autocomplete="off" type="text" name="name" value="<%= sneaker.name  %> ">  
+        <br>
+        <label>price:</label>
+        <br>
+        <input class="keyboardInputS" type="number" name="price" value="<%= sneaker.price %>"> 
+        <br>
+        <label>address:</label>
+        <br>
+        <input class="keyboardInput" autocomplete="off" type="text" name="address" >  
+        <br>
+        <br> 
+        <label>phone number:</label>
+        <br>
+        <input class="keyboardInput" autocomplete="off" type="number" name="phonenumber" >    
+        <br>
+        <br>
+        <label>your design:</label>
+        <br>
+        <br>
+
+        <label for="file-upload" class="inputfile">
+            <i class="fa fa-cloud-upload"></i> upload file
+        </label>
+        <input id="file-upload" name="myDesign" type="file" class="inputfile">
+        <br><br><br>
+
+        <a class="cancel" href="/sneakers"> cancel</a>
+
+        <button class="createButton" type="submit"> place order</button>
+
+        <br><br><br>
+
+
+        <% if (locals.errorMessage != null) { %> 
+        <div class="error"><%= errorMessage %> </div>
+        <% } %> 
+    
+    
+    </form> 
+
+
+    <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
+    <script src="https://unpkg.com/filepond/dist/filepond.js"></script>
+    <script src="/js_functional/index.js"></script>
+    
+
+</body>
+

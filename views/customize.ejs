@@ -56,8 +56,13 @@
 
 
     <div data-command="download"  title="Download">
-        <img width="100" height="100" style="margin-left:300px; margin-top: 100px; position: absolute;" src="/images/download-icon.png"/>
-    </div>                    
+        <img width="100" height="100" style="margin-left:300px; margin-top: 100px; position: absolute;" src="/images/download-icon.png" onclick="showOrder()"/>
+    </div>                 
+    
+
+    
+    <a href="/newOrder/<%=sneaker.id%>" id="order" width="100" height="100">order</a>
+
 
 
     <canvas id="canvas" width="800" height="800"></canvas>

@@ -67,6 +67,9 @@ app.use('/', sneakersRouter)
 const customizeRouter = require('./routes/customize')
 app.use('/', customizeRouter)
 
+const orderRouter = require('./routes/orders')
+app.use('/', orderRouter)
+
 
 
 

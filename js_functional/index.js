@@ -18,3 +18,6 @@ function bringSneakers(){
     document.getElementById("snkrimg").style.marginLeft="400px";
 }
 
+function showOrder(){
+    document.getElementById("order").style.display="block"
+}

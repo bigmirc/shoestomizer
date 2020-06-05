@@ -8,7 +8,7 @@
     <link rel='stylesheet' href='/styles/sneakersStyle.css' />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     
-    <title>all sneakers</title>
+    <title>Order Confirmation</title>
 
 </head>
 
@@ -54,34 +54,28 @@
     </div>
     
 
-    <h1>ALL SNEAKERS</h1>
+    <h1>ORDERS</h1>
 
-    <div class="container">
-        <% sneakers.forEach(sneaker =>{  %> 
-            <div class="snkrname"><%= sneaker.name %></div>
+    <div class="container" style="font-size: 24px; font-weight: bolder;">
+        <% orders.forEach(order =>{  %> 
+            <% if (order.username === name){ %> 
+            <img height="300px" width="300px" src="public/designUploads/<%=order.designName%>"> </img>
+            <div >sneaker name : <%= order.name %></div>
+            <div >order made by:  <%= order.username %></div>
+            <div >total price  :  <%= order.price %></div>
+            <div >address      :  <%= order.address %></div>
+            <div >phone number :  <%= order.phonenumber %></div>
+            <div >uploaded design:  <%= order.designName %></div>
+            <br><br>
+            <% } %> 
 
-            <br>
 
-            <img height="200px" width="200px" src="<%=sneaker.imagePath%>"> </img>
 
-            <div class="vedit" style="background-color: rgb(109, 189, 109);">
-                <a href="/sneakers/<%= sneaker.id %>" > view</a>
-            </div>
-            
-            <div class="vedit" style="background-color: rgb(146, 146, 201);">        
-                <a href="/sneakers/<%= sneaker.id %>/edit" > edit</a>
-            </div>
 
-            <div class="delContainer">
-                <form method="POST" action="/sneakers/<%= sneaker.id %>?_method=DELETE">
-                        <button class="delButton" type="submit"> delete </button>
-                </form>
-            </div>
 
         <% }) %> 
     </div>
 
-    <a class="newSneakerButton" href="/new">ADD A NEW SNEAKER</a>
 
     <a class="back" href="/">inapoi</a>
 

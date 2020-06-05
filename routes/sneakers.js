@@ -103,8 +103,6 @@ router.post('/sneakers', upload.single("myImage"), async (req,res) => {
 })
 
 //route for showing one sneaker by id
-
-
 router.get('/sneakers/:id', async (req,res) =>{
   try {
     const sneaker = await Sneaker.findById(req.params.id)
