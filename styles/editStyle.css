@@ -30,6 +30,8 @@ body {
 
 .title {
 
+    color: rgb(119, 75, 150);
+
     display: inline-block;
     width: 49%;
     height: 100%;

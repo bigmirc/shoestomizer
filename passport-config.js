@@ -1,9 +1,13 @@
 const LocalStrategy = require('passport-local').Strategy
 const bcrypt = require('bcrypt')
 
+const User = require('./models/user')
+
+
 function initialize(passport, getUserByEmail, getUserById) {
     const authenticateUser = async (email, password, done) => {
         const user = getUserByEmail(email)
+        const user2 = (await User.findOne({email:email})).toJSON()
         if (user == null) {
             return done(null, false, { message: 'There is no user with that password. Please try again'})
         };

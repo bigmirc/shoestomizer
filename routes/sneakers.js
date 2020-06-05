@@ -103,8 +103,17 @@ router.post('/sneakers', upload.single("myImage"), async (req,res) => {
 })
 
 //route for showing one sneaker by id
-router.get('/sneakers/:id',  (req,res) =>{
-  res.render('view.ejs', {name:req.user.name, sneaker: sneaker})
+
+
+router.get('/sneakers/:id', async (req,res) =>{
+  try {
+    const sneaker = await Sneaker.findById(req.params.id)
+    res.render('view.ejs', {name:req.user.name, sneaker: sneaker})
+  } catch (error) {
+    console.log(error)
+    res.redirect('/sneakers')
+    
+  }
 })
 
 //route for edit one sneaker by id
@@ -131,6 +140,7 @@ router.put('/sneakers/:id', upload.single("myImage"), async (req,res) =>{
 
 
     if (req.file != null){
+      removeSneakerImage(sneaker.imageName)
       fileName = req.file.filename
       sneaker.imageName= fileName
     }

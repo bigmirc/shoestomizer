@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- linking login style sheet -->
-    <link rel='stylesheet' href='/styles/newStyle.css' />
+    <link rel='stylesheet' href='/styles/viewStyle.css' />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     
-    <title>New Sneaker</title>
+    <title>View Sneaker</title>
 
 </head>
 
@@ -52,47 +52,34 @@
 
 
 
-    <form class="newForm" action="/sneakers" method="POST" enctype="multipart/form-data">
-        <br>
-        <br>
-        <h1>+ new sneaker</h1>
-        <br>
-        <br>
-
-        <label>name:</label>
-        <br>
-        <input class="keyboardInput" autocomplete="off" type="text" name="name" value="<%= sneaker.name %>"> 
-        <br>
-        <br>
-        <br>
-        <label>price:</label>
-        <br>
-        <input class="keyboardInput" autocomplete="off" type="number" name="price" value="<%= sneaker.price %>">    
-        <br>
-        <br>
-        <label>image:</label>
-        <br>
-        <br>
-
-        <label for="file-upload" class="inputfile">
-            <i class="fa fa-cloud-upload"></i> upload file
-        </label>
-        <input id="file-upload" name="myImage" type="file" class="inputfile">
-        <br><br><br>
-
-        <a class="cancel" href="/sneakers"> cancel</a>
-
-        <button class="createButton" type="submit"> create new sneaker</button>
-
-        <br><br><br>
+    <div class="container">
+        <h1>sneaker ID: <%= sneaker.id %> </h1>
+        <h1>sneaker name: <%= sneaker.name %> </h1>
+        <h1>sneaker price: <%= sneaker.price %> </h1>
+        <h1>sneaker image name: <%= sneaker.imageName %> </h1>
+        <img src="" alt="">
+        <img height="500px" width="500px" src="<%=sneaker.imagePath%>"> </img>
 
 
-        <% if (locals.errorMessage != null) { %> 
-        <div class="error"><%= errorMessage %> </div>
-        <% } %> 
+        
+
+    </div>
+
+    <a class="back" href="/sneakers"> back</a>
+
+
+
+
+
+
+
+
+
+    <% if (locals.errorMessage != null) { %> 
+    <div class="error"><%= errorMessage %> </div>
+    <% } %> 
     
     
-    </form> 
 
 
     <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>

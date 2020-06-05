@@ -197,7 +197,9 @@ body {
 #canvas{
     margin-top: 50px;
     margin-left: 420px;
-    background-color: rgb(253, 242, 0);
+    background-color: white;
+    border: 3px solid black;
+    border-radius: 5px;
     
 }
 

@@ -14,6 +14,8 @@ const methodOverride = require('method-override');
 const initializePassport = require('./passport-config');
 const bodyParser = require ('body-parser')
 
+
+
 initializePassport(
     passport,
     email => users.find(user => user.email === email),
@@ -31,6 +33,8 @@ db.on('error', error => console.error(error))
 db.once('open', () => console.log('connected to Mongoose'))
 
 
+
+//const users = User.find({})
 
 const users=[]; //variabila locala pt useri 
 
@@ -52,9 +56,7 @@ app.use(passport.session());
 app.use(methodOverride("_method"))
 app.use(bodyParser.urlencoded({limit:'10mb', extended: false}))
 
-// app.get('/', checkAuthenticated, (req,res) =>{
-//     res.render('index.ejs', {name: req.user.name});
-// })
+
 const indexRouter = require('./routes/index')
 app.use('/', indexRouter)
 
@@ -62,23 +64,16 @@ const sneakersRouter = require('./routes/sneakers')
 app.use('/', sneakersRouter)
 
 
-// app.get('/customize', checkAuthenticated, (req,res) =>{
-//     res.render('customize.ejs', {name: req.user.name});
-// })
 const customizeRouter = require('./routes/customize')
 app.use('/', customizeRouter)
 
 
 
-// app.get('/login',checkNotAuthenticated, (req,res)=>{
-//     res.render('login.ejs');
-// })
+
 const loginRouter = require('./routes/login')
 app.use('/', loginRouter)
 
-// app.get('/register',checkNotAuthenticated, (req,res)=>{
-//     res.render('register.ejs');
-// });
+
 const registerRouter = require('./routes/register')
 app.use('/', registerRouter)
 
@@ -90,9 +85,14 @@ app.post('/login',checkNotAuthenticated, passport.authenticate('local', {
 }))
 
 
+
+
+const User = require('./models/user')
 app.post('/register',checkNotAuthenticated, async (req,res)=>{
     
     try{
+
+
         const hashedPassword = await bcrypt.hash(req.body.password,10); //10 - how many times do you want it hashed? 10 makes it quick and secure.
         users.push({
             id: Date.now().toString(),
@@ -100,9 +100,15 @@ app.post('/register',checkNotAuthenticated, async (req,res)=>{
             email: req.body.email,
             password: hashedPassword
         });
+        const newUser = new User({
+            name: req.body.name,
+            email: req.body.email,
+            password: hashedPassword        })
+        console.log(newUser)
+        newUser.save()
         res.redirect('/login');
     } catch{
-        console.log('numere')
+        console.log('errrr')
         res.redirect('/register');
     }
     console.log(users);
