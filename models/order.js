@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 const path = require('path')
 
 const orderSchema = new mongoose.Schema({
-    name: {
+    sneakerName: {
         type: String,
         required: true
     },   
@@ -14,12 +14,16 @@ const orderSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
+    size: {
+        type: Number,
+        required: true
+    },  
     address: {
         type: String,
         required: true
     },
-    phonenumber: {
-        type: Number,
+    phoneNumber: {
+        type: String,
         required: true
     },
     designName: {

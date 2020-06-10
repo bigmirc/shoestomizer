@@ -88,17 +88,13 @@ router.post('/orders', checkAuthenticated, upload.single("myDesign"), async (req
     fileName = req.file.filename
   }
 
-  // if (req.body.address =='' || req.body.phonenumber == '' || fileName ==''){
-
-  //   res.render('newOrder.ejs', {name:req.user.name,  errorMessage: 'Error order '})
-
-  // }
   const order = new Order({
-      name: req.body.name,
+      sneakerName: req.body.name,
       username: req.user.name,
       price:req.body.price,
+      size:req.body.size,
       address:req.body.address,
-      phonenumber:req.body.phonenumber,
+      phoneNumber:req.body.phoneNumber,
       designName: fileName
 
   })
@@ -118,9 +114,23 @@ router.post('/orders', checkAuthenticated, upload.single("myDesign"), async (req
       imageName: ''
 
   })
+    if ( req.file == null){
+      res.render('newOrder.ejs', {name:req.user.name, sneaker:sneaker, errorMessage: 'Order Error - Upload an Image! '})
+    } else
+    if ( req.body.price == ''){
+      res.render('newOrder.ejs', {name:req.user.name, sneaker:sneaker, errorMessage: 'Order Error - Fill Price field '})
+    } else
+    if ( req.body.size == ''){
+      res.render('newOrder.ejs', {name:req.user.name, sneaker:sneaker, errorMessage: 'Order Error - Fill Size field! '})
+    } else
+    if ( req.body.address == ''){
+      res.render('newOrder.ejs', {name:req.user.name, sneaker:sneaker, errorMessage: 'Order Error - Fill Address field! '})
+    } else
+    if ( req.body.phoneNumber == ''){
+      res.render('newOrder.ejs', {name:req.user.name, sneaker:sneaker, errorMessage: 'Order Error - Fill Phone Number field! '})
+    } else {res.render('newOrder.ejs', {name:req.user.name, sneaker:sneaker, errorMessage: 'Order Error'})}
 
 
-    res.render('newOrder.ejs', {name:req.user.name, sneaker:sneaker, errorMessage: 'Error order '})
 
   }
 })

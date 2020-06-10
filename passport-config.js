@@ -9,7 +9,7 @@ function initialize(passport, getUserByEmail, getUserById) {
         const user2 = getUserByEmail(email)
         var user = (await User.findOne({email:email}))
         if (user == null) {
-            return done(null, false, { message: 'There is no user with that password. Please try again'})
+            return done(null, false, { message: 'There is no user with that email. Please try again!'})
         };
         user = user.toJSON()
 

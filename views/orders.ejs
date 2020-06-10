@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- linking login style sheet -->
-    <link rel='stylesheet' href='/styles/sneakersStyle.css' />
+    <link rel='stylesheet' href='/styles/ordersStyle.css' />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     
     <title>Order Confirmation</title>
@@ -60,12 +60,20 @@
         <% orders.forEach(order =>{  %> 
             <% if (order.username === name){ %> 
             <img height="300px" width="300px" src="public/designUploads/<%=order.designName%>"> </img>
-            <div >sneaker name : <%= order.name %></div>
-            <div >order made by:  <%= order.username %></div>
-            <div >total price  :  <%= order.price %></div>
-            <div >address      :  <%= order.address %></div>
-            <div >phone number :  <%= order.phonenumber %></div>
-            <div >uploaded design:  <%= order.designName %></div>
+            <br>
+            <div class="field" >sneaker name :</div>  <div style="display: inline-block;"><%= order.sneakerName %></div>
+            <br>
+            <div class="field" >order made by:</div>  <div style="display: inline-block;"><%= order.username %></div>
+            <br>
+            <div class="field" >total price  : </div>  <div style="display: inline-block;"><%= order.price %></div>
+            <br>
+            <div class="field" >sneaker size : </div>  <div style="display: inline-block;"><%= order.size %></div>
+            <br>
+            <div class="field" >address      :  </div>  <div style="display: inline-block;"><%= order.address %></div>
+            <br>
+            <div class="field" >phone number :  </div>  <div style="display: inline-block;"><%= order.phoneNumber %></div>
+            <br>
+            <div class="field" >uploaded design:  </div>  <div style="display: inline-block;"><%= order.designName %></div>
             <br><br>
             <% } %> 
 
