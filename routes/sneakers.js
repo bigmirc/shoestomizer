@@ -51,6 +51,20 @@ function checkAuthenticated(req, res, next){
 
 }
 
+//remove image if sneaker's not created properly
+function removeSneakerImage(fileName){
+  fs.unlink(path.join('./public/uploads/',fileName), err =>{
+    if (err) console.log(err)
+  })
+}
+
+//new sneaker route
+router.get('/new', checkAuthenticated, (req,res) => {
+  res.render('new.ejs', {name:req.user.name, sneaker: new Sneaker()})
+})
+
+
+
 //all sneakers route
 router.get('/sneakers', checkAuthenticated, async (req,res) => {
     try {
@@ -61,18 +75,6 @@ router.get('/sneakers', checkAuthenticated, async (req,res) => {
     }
 })
 
-//new sneaker route
-router.get('/new', checkAuthenticated, (req,res) => {
-    res.render('new.ejs', {name:req.user.name, sneaker: new Sneaker()})
-})
-
-//remove image if sneaker's not created properly
-function removeSneakerImage(fileName){
-  fs.unlink(path.join('./public/uploads/',fileName), err =>{
-    if (err) console.log(err)
-  })
-
-}
 //create sneaker route
 router.post('/sneakers', upload.single("myImage"), async (req,res) => {
 
@@ -81,24 +83,18 @@ router.post('/sneakers', upload.single("myImage"), async (req,res) => {
   } else {
     fileName = req.file.filename
   }
-
   const sneaker = new Sneaker({
       name: req.body.name,
       price: req.body.price,
       imageName: fileName
-
   })
-
   try {
     const newSneaker = await sneaker.save()
     console.log(sneaker)
     res.redirect('/sneakers')
-
   } catch {
-
     if (sneaker.imageName != ''){removeSneakerImage(sneaker.imageName)}
     res.render('new.ejs', {name:req.user.name, sneaker: sneaker, errorMessage: 'Error creating sneaker'})
-
   }
 })
 

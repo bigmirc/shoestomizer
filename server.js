@@ -34,7 +34,6 @@ db.once('open', () => console.log('connected to Mongoose'))
 
 
 
-//const users = User.find({})
 
 const users=[]; //variabila locala pt useri 
 
@@ -89,24 +88,22 @@ app.post('/login',checkNotAuthenticated, passport.authenticate('local', {
 
 
 
-
 const User = require('./models/user')
+
 app.post('/register',checkNotAuthenticated, async (req,res)=>{
     
     try{
-
-
         const hashedPassword = await bcrypt.hash(req.body.password,10); //10 - how many times do you want it hashed? 10 makes it quick and secure.
-
         const newUser = new User({
             name: req.body.name,
             email: req.body.email,
-            password: hashedPassword        })
+            password: hashedPassword    
+            })
         console.log(newUser)
         newUser.save()
         res.redirect('/login');
     } catch{
-        console.log('errrr')
+        console.log('error')
         res.redirect('/register');
     }
 });
