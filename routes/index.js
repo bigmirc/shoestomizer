@@ -3,6 +3,10 @@ const express = require("express")
 const router = express.Router()
 const Sneaker = require('../models/sneaker')
 
+const SneakersRepo = require("../repositories/sneakersRepo");
+
+const sneakersRepo = new SneakersRepo()
+
 
 
 function checkAuthenticated(req, res, next){
@@ -18,7 +22,7 @@ function checkAuthenticated(req, res, next){
 //all sneakers route
 router.get('/', checkAuthenticated, async (req,res) => {
     try {
-        const sneakers = await Sneaker.find({})
+        const sneakers = await sneakersRepo.sneakers
         res.render('index.ejs', {name:req.user.name, sneakers: sneakers})
     } catch  {
         res.redirect('/')

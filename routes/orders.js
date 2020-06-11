@@ -7,6 +7,10 @@ const multer = require('multer');
 const path = require('path');
 const fs = require('fs')
 
+const OrdersRepo = require("../repositories/OrdersRepo");
+const ordersRepo = new OrdersRepo()
+const SneakersRepo = require("../repositories/SneakersRepo");
+const sneakersRepo = new SneakersRepo()
 // Set The Storage Engine
 const storage = multer.diskStorage({
   destination: './public/designUploads/',
@@ -53,17 +57,17 @@ function checkAuthenticated(req, res, next){
 }
 
 //remove image if order's not created properly
-function removeOrderImage(fileName){
-  fs.unlink(path.join('./public/designUploads/',fileName), err =>{
-    if (err) console.log(err)
-  })
+// function removeOrderImage(fileName){
+//   fs.unlink(path.join('./public/designUploads/',fileName), err =>{
+//     if (err) console.log(err)
+//   })
 
-}
+// }
 
 //all orders route
 router.get('/orders', checkAuthenticated, async (req,res) => {
     try {
-        const orders = await Order.find({})
+        const orders = await ordersRepo.orders
         res.render('orders.ejs', {name:req.user.name, orders:orders})
     } catch  {
         res.redirect('/')
@@ -73,7 +77,7 @@ router.get('/orders', checkAuthenticated, async (req,res) => {
 //new order route
 router.get('/newOrder/:id', checkAuthenticated, async (req,res) => {
 
-  const sneaker = await Sneaker.findById(req.params.id)
+  const sneaker = await sneakersRepo.findSneakerById(req.params.id)
   console.log(sneaker)
   res.render('newOrder.ejs', {name:req.user.name, sneaker: sneaker})
 })
@@ -88,47 +92,34 @@ router.post('/orders', checkAuthenticated, upload.single("myDesign"), async (req
     fileName = req.file.filename
   }
 
-  const order = new Order({
-      sneakerName: req.body.name,
-      username: req.user.name,
-      price:req.body.price,
-      size:req.body.size,
-      address:req.body.address,
-      phoneNumber:req.body.phoneNumber,
-      designName: fileName
-
-  })
+  const order =  ordersRepo.createOrder(
+      req.body.name,
+      req.user.name,
+      req.body.price,
+      req.body.size,
+      req.body.address,
+      req.body.phoneNumber,
+      fileName
+    )
 
   try {
-    const newOrder = await order.save()
+    if (order.designName === '') {throw err}
+
+    const newOrder = await ordersRepo.saveOrder(order)
     console.log(order)
     res.redirect('/orders')
 
   } catch  (err) {
 
 
-    if (order.designName != ''){removeOrderImage(order.designName)}
-    const sneaker = new Sneaker({
-      name: req.body.name,
-      price: req.body.price,
-      imageName: ''
+    if (order.designName != ''){ordersRepo.removeOrderImage(order.designName)}
+    const sneaker = sneakersRepo.createSneaker(
+      req.body.name,
+      req.body.price,
+      ''
+    )
 
-  })
-    if ( req.file == null){
-      res.render('newOrder.ejs', {name:req.user.name, sneaker:sneaker, errorMessage: 'Order Error - Upload an Image! '})
-    } else
-    if ( req.body.price == ''){
-      res.render('newOrder.ejs', {name:req.user.name, sneaker:sneaker, errorMessage: 'Order Error - Fill Price field '})
-    } else
-    if ( req.body.size == ''){
-      res.render('newOrder.ejs', {name:req.user.name, sneaker:sneaker, errorMessage: 'Order Error - Fill Size field! '})
-    } else
-    if ( req.body.address == ''){
-      res.render('newOrder.ejs', {name:req.user.name, sneaker:sneaker, errorMessage: 'Order Error - Fill Address field! '})
-    } else
-    if ( req.body.phoneNumber == ''){
-      res.render('newOrder.ejs', {name:req.user.name, sneaker:sneaker, errorMessage: 'Order Error - Fill Phone Number field! '})
-    } else {res.render('newOrder.ejs', {name:req.user.name, sneaker:sneaker, errorMessage: 'Order Error'})}
+    res.render('newOrder.ejs', {name:req.user.name, sneaker:sneaker, errorMessage: 'Order Error - add an image'})
 
 
 

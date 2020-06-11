@@ -4,7 +4,10 @@ const router = express.Router()
 const Sneaker = require('../models/sneaker')
 const multer = require('multer');
 const path = require('path');
-const fs = require('fs')
+const SneakersRepo = require("../repositories/sneakersRepo");
+
+const sneakersRepo = new SneakersRepo()
+
 
 // Set The Storage Engine
 const storage = multer.diskStorage({
@@ -44,18 +47,11 @@ function checkFileType(file, cb){
 function checkAuthenticated(req, res, next){
 
     if (req.isAuthenticated()){
-        return next();
+      return next();
     }
 
     res.redirect('/login');
 
-}
-
-//remove image if sneaker's not created properly
-function removeSneakerImage(fileName){
-  fs.unlink(path.join('./public/uploads/',fileName), err =>{
-    if (err) console.log(err)
-  })
 }
 
 //new sneaker route
@@ -68,9 +64,10 @@ router.get('/new', checkAuthenticated, (req,res) => {
 //all sneakers route
 router.get('/sneakers', checkAuthenticated, async (req,res) => {
     try {
-        const sneakers = await Sneaker.find({})
+        const sneakers = await sneakersRepo.sneakers ///repo
         res.render('sneakers.ejs', {name:req.user.name, sneakers: sneakers})
-    } catch  {
+    } catch (err) {
+      console.log(err)
         res.redirect('/')
     }
 })
@@ -83,16 +80,15 @@ router.post('/sneakers', upload.single("myImage"), async (req,res) => {
   } else {
     fileName = req.file.filename
   }
-  const sneaker = new Sneaker({
-      name: req.body.name,
-      price: req.body.price,
-      imageName: fileName
-  })
+  const sneaker = sneakersRepo.createSneaker(req.body.name, req.body.price, fileName) ////repo
+
   try {
-    const newSneaker = await sneaker.save()
+    if (sneaker.imageName === '') {throw err}
+    
+    const newSneaker = await sneakersRepo.saveSneaker(sneaker)
     console.log(sneaker)
     res.redirect('/sneakers')
-  } catch {
+  } catch (err) {
     if (sneaker.imageName != ''){removeSneakerImage(sneaker.imageName)}
     res.render('new.ejs', {name:req.user.name, sneaker: sneaker, errorMessage: 'Error creating sneaker'})
   }
@@ -101,7 +97,8 @@ router.post('/sneakers', upload.single("myImage"), async (req,res) => {
 //route for showing one sneaker by id
 router.get('/sneakers/:id', async (req,res) =>{
   try {
-    const sneaker = await Sneaker.findById(req.params.id)
+    const sneaker = await sneakersRepo.findSneakerById(req.params.id) //repo
+
     res.render('view.ejs', {name:req.user.name, sneaker: sneaker})
   } catch (error) {
     console.log(error)
@@ -113,7 +110,7 @@ router.get('/sneakers/:id', async (req,res) =>{
 //route for edit one sneaker by id
 router.get('/sneakers/:id/edit', async (req,res) =>{
   try {
-    const sneaker = await Sneaker.findById(req.params.id)
+    const sneaker = await sneakersRepo.findSneakerById(req.params.id) //repo
     res.render('edit.ejs', {name:req.user.name, sneaker: sneaker})
   } catch (error) {
     console.log(error)
@@ -128,26 +125,24 @@ router.put('/sneakers/:id', upload.single("myImage"), async (req,res) =>{
   let sneaker
 
   try {
-    sneaker = await Sneaker.findById(req.params.id)
-    sneaker.name = req.body.name
-    sneaker.price = req.body.price
 
+    sneaker = await sneakersRepo.findSneakerById(req.params.id)
 
     if (req.file != null){
-      removeSneakerImage(sneaker.imageName)
-      fileName = req.file.filename
-      sneaker.imageName= fileName
+      sneakersRepo.removeSneakerImage(sneaker.imageName)
+      sneakersRepo.editSneakerWithNewImage(sneaker, req.body.name, req.body.price,req.file, req.file.filename)
+    } else {
+      sneakersRepo.editSneakerWithoutNewImage(sneaker, req.body.name, req.body.price)
     }
-    
-    
-    await sneaker.save()
 
+    await sneaker.save()
     console.log(sneaker)
     res.redirect('/sneakers')
 
-  } catch {
+  } catch (err) {
 
-    if (sneaker.imageName != null){removeSneakerImage(sneaker.imageName)}
+    console.log(err)
+    if (sneaker.imageName != null){sneakersRepo.removeSneakerImage(sneaker.imageName)}
     res.render('edit.ejs', {name:req.user.name, sneaker: sneaker, errorMessage: 'Error updating sneaker'})
 
   }
@@ -156,22 +151,20 @@ router.put('/sneakers/:id', upload.single("myImage"), async (req,res) =>{
 
 //route for del one sneaker by id
 router.delete('/sneakers/:id', async (req,res) =>{
+
   let sneaker
 
   try {
-    sneaker = await Sneaker.findById(req.params.id)
-    
-    await sneaker.remove()
-    removeSneakerImage(sneaker.imageName)
+    sneaker = await sneakersRepo.findSneakerById(req.params.id)
+    await sneakersRepo.removeSneaker(sneaker)
 
-
+    sneakersRepo.removeSneakerImage(sneaker.imageName)
     console.log(sneaker)
     res.redirect('/sneakers')
 
-  } catch {
-
+  } catch (err) {
+    console.log(err)
     res.render('edit.ejs', {name:req.user.name, sneaker: sneaker, errorMessage: 'Error deleting sneaker'})
-
   }
 })
 
