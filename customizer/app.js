@@ -31,8 +31,6 @@ document.querySelectorAll("[data-color]").forEach(
         item.addEventListener("click", e=>{
             document.querySelector("[data-color].active").classList.toggle("active")
             item.classList.toggle("active")
-
-
             let color = item.getAttribute("data-color")
             paint.selectedColor = color
         })
