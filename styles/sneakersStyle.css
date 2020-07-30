@@ -255,8 +255,27 @@ a{
 
 }
 
+
 .back{
     margin-left: 18%;
     padding-bottom: 50px;
     color: black;
+
+    border: 2px solid black;
+
+    cursor: pointer;
+    width: 100px;
+    text-align: center;
+    color: white;
+    text-decoration: none;
+
+    display: inline-block;
+
+    font-size: 1vw;
+    padding: 17px;
+    border-radius: 50px;
+    background-color: rgb(60, 190, 173);
+    margin-bottom:40px;
+
+
 }

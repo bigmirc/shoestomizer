@@ -16,7 +16,7 @@ function checkAuthenticated(req, res, next){
 
 }
 
-//route for showing one sneaker by id
+//route for customizing one sneaker by id
 router.get('/customize/:id', checkAuthenticated, async (req,res) =>{
 
     try {

@@ -19,7 +19,7 @@ function checkAuthenticated(req, res, next){
 
 }
 
-//all sneakers route
+//all sneakers route for index
 router.get('/', checkAuthenticated, async (req,res) => {
     try {
         const sneakers = await sneakersRepo.sneakers

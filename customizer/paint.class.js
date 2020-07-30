@@ -16,8 +16,6 @@ export default class Paint{
     }
 
 
-
-
     set selectedColor(color){
         this.color = color
     }

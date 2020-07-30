@@ -59,11 +59,15 @@
         <br>
         <label>sneaker name:</label>
         <br>
-        <input class="keyboardInputS" autocomplete="off" type="text" name="name" value="<%= sneaker.name  %> ">  
+        <label><%= sneaker.name  %></label>
         <br>
-        <label>price:</label>
+        <input class="keyboardInputS" hidden autocomplete="off" type="text" name="name" value="<%= sneaker.name  %> ">  
         <br>
-        <input class="keyboardInputS" type="number" name="price" value="<%= sneaker.price %>"> 
+        <label>sneaker price:</label>
+        <br>
+        <label><%= sneaker.price %></label>
+        <br>
+        <input  class="keyboardInputS" hidden type="number" name="price" value="<%= sneaker.price %>"> 
         <br>
         <label>size:</label>
         <br>
